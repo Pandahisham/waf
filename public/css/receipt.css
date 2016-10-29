@@ -1,0 +1,33 @@
+.Customer_info{
+	margin-top: 60px;
+	margin-bottom: 50px;
+	margin-left: 100px;
+
+}
+
+h2{
+	color: #052127;
+	font-family:  Lucida Fax serif;
+	font-variant: small-caps;
+	
+}
+p{
+	font-family: sans-serif;
+}
+
+#receipt_list{
+	margin-top: 100px;
+	margin-right: 80px;
+	margin-left: 110px;
+}
+
+table thead{
+  font-weight: 500;
+  font-family: Trebuchet MS, sans-serif;
+  background-color: #00c5cd;
+  text-align: center;
+}
+
+table tbody td{
+	font-family: Trebuchet MS, sans-serif;
+}

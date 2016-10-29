@@ -1,0 +1,30 @@
+.customer_form{
+
+	padding-top: 50px;
+	margin-bottom: 100px;
+	margin-left: 200px;
+}
+
+.customer_form h2{
+
+	color: #052127;
+	font-family:  Lucida Fax serif;
+	font-variant: small-caps;
+	padding-bottom: 20px;
+	padding-top: 50px;
+	margin-left: 200px;
+}
+
+
+label{
+	padding-top: 20px;
+}
+
+#update-button{
+
+	margin-left: 250px;
+	margin-top: 20px;
+}
+
+
+
