@@ -34,6 +34,8 @@ Route::get('/customer_list',['as' => 'customer_list', 'uses' => 'CustomerControl
 Route::post('/addCustomer', 'CustomerController@addCustomer');
 Route::get('/deleteCustomer/{customer}',['as' => 'deleteCustomer', 'uses' => 'CustomerController@deleteCustomer']);
 Route::get('/saleToCustomer/{customer}',['as' => 'saleToCustomer', 'uses' => 'SaleController@index']);
+Route::get('/receipt/{sale}',['as' => 'receipt', 'uses' => 'SaleController@receipt']);
+Route::get('/sales',['as' => 'sales', 'uses' => 'SaleController@saleList']);
 Route::get('/updateCustomer/{customer}',['as' => 'updateCustomer', 'uses' => 'CustomerController@updateCustomer']);
 Route::post('/updateCustomerInformation', 'CustomerController@updateCustomerInformation');
 Route::post('/addTransaction', 'SaleController@addTransaction');

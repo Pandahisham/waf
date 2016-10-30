@@ -10,24 +10,22 @@
   <thead>
   	<td>Serial</td>
   	<td>Date</td>
-  	<td>Customer Name</td>
-  	<td>Customer Type</td>
-  	<td>Sell Amount</td>
-  	<td>View Receipt</td>
+  	<td>Total Amount</td>
+  	<td>Receipt</td>
   </thead>
-
+<?php $i=0; ?>
   <tbody>
+    @foreach($sales as $sale)
+    <?php $i=$i+1?>
   	<tr>
-  		<td></td>
-  		<td></td>
-  		<td></td>
-  		<td></td>
-  		<td></td>
+  		<td>{{$i}}</td>
+  		<td>{{$sale->created_at}}</td>
+  		<td>{{$sale->total}}</td>
   		<td width="15%">
-  		<a class="w3-btn w3-white w3-border w3-round-large" href="#">receipt</a>
+  		<a class="w3-btn w3-white w3-border w3-round-large" href="{!! route('receipt', ['sale'=>$sale]) !!}">receipt</a>
   		</td>
   	</tr>
- 
+    @endforeach 
   </tbody>
 </table>
 

@@ -86,7 +86,7 @@
                 ?>
                 <tr>
                     <td>{{$saleinfo['customer']->name}}</td>
-                    <td>{{$saleinfo['customer']->type}}</td>
+                    <td>{{$saleinfo['customer']->category}}</td>
                     <td>{{$item_name}}</td>
                     <td>{{$quantity}}</td>
                     <td>{{$transaction->item_price}}</td>
@@ -103,7 +103,7 @@
 
     </table>
 
-    <?php $net_price=$total_price-$total_discount; ?>
+    <?php $net_price=$total_price-$total_discount+$vat; ?>
 
     <div class="form-group" id="total_price">
         <label for="total_price" class="col-sm-2 control-label">Total Price</label>
@@ -127,7 +127,7 @@
     <div class="form-group" id="vat_price">
         <label for="vat_price" class="col-sm-2 control-label">Vat</label>
         <div class="col-sm-4">
-            <input type="number" class="form-control" id="sum_price" value={{$vat}} readonly>
+            <input type="number" class="form-control" id="vat" value={{$vat}} readonly>
         </div>
     </div>
     <div class="form-group" id="sum_price">

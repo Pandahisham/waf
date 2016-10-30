@@ -31,15 +31,39 @@ class SaleController extends Controller
         else
             return view('welcome');
     }
+    public function saleList()
+    {
+        if(auth()->user())
+        {
+                $sales=Sale::orderBy('created_at','desc')->get();
+
+
+                return view('sales_new')->with('sales',$sales);
+
+        }
+        else
+            return view('welcome');
+    }
+    public function receipt(Sale $sale)
+    {
+        if(auth()->user())
+        {
+            
+                return view('receipt')->with('sale',$sale);
+
+        }
+        else
+            return view('welcome');
+    }
     public function addTransaction(Request $request){
         $item_tag=$request['item_tag'];
-        $quanity=intval($request['item_quantity']);
+        $quantity=intval($request['item_quantity']);
         $customer_id=$request['customer_id'];
 
         $item=Item::where('tag',$item_tag)->first();
         $item_id=$item->id;
-        $item_quanity=Quantity::where('item_id',$item_id)->first();
-        if($item_quanity->item_quantity<$quanity){
+        $item_quantity=Quantity::where('item_id',$item_id)->first();
+        if($item_quantity->item_quantity<$quantity){
             echo "Not enough items in the inventory";
             return back();
         }
@@ -47,11 +71,13 @@ class SaleController extends Controller
         $transaction=new Transaction();
         $transaction->item_id=$item_id;
         $transaction->status=0;
-        $transaction->item_quantity=$quanity;
-        $transaction->item_price=$quanity*($item->price);
+        $transaction->item_quantity=$quantity;
+        $transaction->item_price=$quantity*($item->price);
         $transaction->item_discount=0;
         $transaction->customer_id=$customer_id;
         $transaction->save();
+        $item_quantity->item_quantity=($item_quantity->item_quantity)-$quantity;
+        $item_quantity->save();
         return back();
         }
 
@@ -61,7 +87,9 @@ class SaleController extends Controller
         if(!auth()->user()){
             return redirect('/');
         }
-
+        $item_quantity=Quantity::where('item_id',$transaction->item_id)->first();
+        $item_quantity->item_quantity=($item_quantity->item_quantity)+$transaction->item_quantity;
+        $item_quantity->save();
         $transaction->delete();
         return back();
     }
@@ -82,14 +110,10 @@ class SaleController extends Controller
                 $transaction->status=1;
                 $transaction->save();
                 $item_quantity=$transaction->item_quantity;
-                $quantity=Quantity::where('item_id',$transaction->item_id)->first();
-                $new_quantity=($quantity->item_quantity)-$item_quantity;
-                $quantity->item_quantity=$new_quantity;
-                $quantity->save();
                 $this->adjustBatch($item_quantity,$transaction->item_id);
             }
 
-            return back();
+            return view('receipt')->with('sale',$sale);
 
         }
 
@@ -110,11 +134,13 @@ class SaleController extends Controller
             elseif(($batch->quantity)>=$quantity)
             {
                 $batch->quantity=($batch->quantity)-$quantity;
+                $batch->sell=$quantity;
                 $quantity=0;
                 $batch->save();
             }
             else{
                 $quantity=$quantity-($batch->quantity);
+                $batch->sell=$batch->quantity;
                 $batch->quantity=0;
                 $batch->save();
             }
