@@ -8,6 +8,7 @@ use App\Item;
 use App\Quantity;
 use App\Sale;
 use App\Transaction;
+use App\Offer;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -59,7 +60,6 @@ class SaleController extends Controller
         $item_tag=$request['item_tag'];
         $quantity=intval($request['item_quantity']);
         $customer_id=$request['customer_id'];
-
         $item=Item::where('tag',$item_tag)->first();
         $item_id=$item->id;
         $item_quantity=Quantity::where('item_id',$item_id)->first();
@@ -68,12 +68,18 @@ class SaleController extends Controller
             return back();
         }
         else{
+        $offer=Offer::where('item_id',$item_id)->first();
+        $date=date('Y-m-d');
+        $discount=0;
+        if(($offer->validity>$date) && ($quantity>=$offer->quantity)){
+            $discount=$offer->price;
+        }    
         $transaction=new Transaction();
         $transaction->item_id=$item_id;
         $transaction->status=0;
         $transaction->item_quantity=$quantity;
         $transaction->item_price=$quantity*($item->price);
-        $transaction->item_discount=0;
+        $transaction->item_discount=$discount;
         $transaction->customer_id=$customer_id;
         $transaction->save();
         $item_quantity->item_quantity=($item_quantity->item_quantity)-$quantity;

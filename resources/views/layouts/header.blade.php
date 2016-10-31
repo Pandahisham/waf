@@ -52,6 +52,10 @@
                     <li><a href="{{ url('/product') }}">Product</a></li>
                 </ul>
 
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/offers') }}">Offers</a></li>
+                </ul>
+
                  <ul class="nav navbar-nav">
                     <li><a href="{{ url('/sales') }}">Sales</a></li>
                 </ul>

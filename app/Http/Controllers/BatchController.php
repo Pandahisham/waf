@@ -35,6 +35,18 @@ class BatchController extends Controller
         $batch->save();
         return back();
     }
+    public function updateBatchInfo(Request $request){
+        $batch_id=$request['batch_id'];
+        $addition=intval($request['addition']);
+        $batch=Batch::where('id',$batch_id)->first();
+        $batch->quantity=$batch->quantity+$addition;
+        $batch->manufacture=$request['manufacture'];
+        $batch->expiry=$request['expiry'];
+        $batch->tag=$request['tag'];
+        $batch->shrinkage=$request['shrinkage'];
+        $batch->save();
+        return back();
+    }
     public function deleteBatch(Batch $batch)
     {
         if(!auth()->user()){
@@ -44,13 +56,11 @@ class BatchController extends Controller
         $batch->delete();
         return back();
     }
-    public function updateBatch(Batch $batch)
+    public function updateBatchPage(Batch $batch)
     {
-        if(!auth()->user()){
-            return redirect('/');
+        if(auth()->user()){
+            return view('batch_update')->with('batch',$batch);
         }
-
-        $batch->delete();
         return back();
     }
 }

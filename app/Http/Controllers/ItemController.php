@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\Offer;
 use App\Quantity;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,33 @@ class ItemController extends Controller
         }
         else
             return view('welcome');
+    }
+    public function offers()
+    {
+        if(auth()->user())
+        {
+                $offers=Offer::orderby('validity','desc')->get();
+
+
+                return view('offers')->with('offers',$offers);
+
+        }
+        else
+            return view('welcome');
+    }
+    public function addOffer(Request $request){
+        $item_tag=$request['Item'];
+        $quantity=intval($request['quantity']);
+        $price=floatval($request['price']);
+        $offer=new Offer();
+        $item=Item::where('tag',$item_tag)->first();
+        $item_id=$item->id;
+        $offer->item_id=$item_id;
+        $offer->quantity=$quantity;
+        $offer->validity=$request['validity'];
+        $offer->price=$price;
+        $offer->save();
+        return redirect('/offers');
     }
     public function insertItem(Request $request)
     {
@@ -61,6 +89,15 @@ class ItemController extends Controller
         }
 
         $item->delete();
+        return back();
+    }
+    public function deleteOffer(Offer $offer)
+    {
+        if(!auth()->user()){
+            return redirect('/');
+        }
+
+        $offer->delete();
         return back();
     }
 }
