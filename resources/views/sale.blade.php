@@ -65,7 +65,7 @@
                 <td width="15%">Quantity</td>
                 <td width="15%">Price</td>
                 <td width="15%">Discount</td>
-                <td width="15%">Net Price</td>
+                <td width="15%">Price After Discount</td>
                 <td width="15%">Delete</td>
               
             </thead>
@@ -91,6 +91,7 @@
                     <td>{{$quantity}}</td>
                     <td>{{$transaction->item_price}}</td>
                     <td>{{$transaction->item_discount}}</td>
+                    <td>{{$transaction->item_price-$transaction->item_discount}}</td>
                     <td> <a href="{!! route('deleteTransaction', ['transaction'=>$transaction]) !!}">x</a></td>
                 </tr>
                 <?php
@@ -103,7 +104,9 @@
 
     </table>
 
-    <?php $net_price=$total_price-$total_discount+$vat; ?>
+    <?php 
+    $vat=$total_price*0.15;
+    $net_price=$total_price-$total_discount+$vat; ?>
 
     <div class="form-group" id="total_price">
         <label for="total_price" class="col-sm-2 control-label">Total Price</label>
