@@ -9,8 +9,8 @@ class Item extends Model
 {
     protected $table='items';
     protected $fillable = [
-        'tag','name','price',
-    ];
+        'tag','name','price','image',
+                    ];
     public function batch(){
         return $this->hasMany('App\Batch');
     }

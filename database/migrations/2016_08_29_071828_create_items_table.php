@@ -18,6 +18,7 @@ class CreateItemsTable extends Migration
             $table->string('tag')->unique();
             $table->string('name')->unique();
             $table->float('price');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

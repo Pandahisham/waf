@@ -14,7 +14,7 @@
 
       <div class="col-md-8">
 
-          <form class="form-horizontal" role="form" method="POST" action="{{ url('/insertItem') }}">
+          <form class="form-horizontal" enctype="multipart/form-data" role="form" method="POST" action="{{ url('/insertItem') }}">
               {{ csrf_field() }}
 
   			  <div class="form-group">
@@ -45,6 +45,12 @@
    	 				<input type="float" class="form-control" id="item_price" name="item_price">
    	 				</div>
   				</div>
+          <div class="form-group">
+            <label for="image" class="col-sm-4 control-label">Image</label>
+            <div class="col-sm-4">
+            <input type="file" class="form-control" id="image" name="image">
+            </div>
+          </div>
               <div class="form-group">
                   <div class="col-md-8 col-md-offset-4">
                       <button type="submit" class="btn btn-primary">
@@ -79,6 +85,7 @@
           <td>Item ID</td>
           <td>Item Code</td>
           <td>Product Name</td>
+          <td>Image</td>
           <td>Quantity</td>
           <td>Price</td>
           <td>Batch Status</td>
@@ -95,10 +102,14 @@
                 {
                     $batch_quantity=$batch_quantity+$batch->quantity;
                 }
+                $img = \Intervention\Image\Facades\Image::make('images/panda.jpg');
+                $img->resize(100, 100);
+                $img->save();
             ?>
           <td>{{$count}}</td>
           <td>{{$item->tag}}</td>
           <td><a href="{!! route('batch', ['item'=>$item]) !!}">{{$item->name}}</a></td>
+          <td><img src="images/{{$item->image}}" height="400" width="2">></td>
           <td>{{$quantity->item_quantity}}</td>
           <td>{{$item->price}}</td>
               @if(($quantity->item_quantity)!=$batch_quantity)

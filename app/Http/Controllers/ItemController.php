@@ -56,13 +56,17 @@ class ItemController extends Controller
         if(!auth()->user()){
             return redirect('/');
         }
+        $file = $request['image'];
+        $name=$file->getClientOriginalName();
         $item=Item::create([
             'name' => $request['item_name'],
             'tag' => $request['item_tag'],
             'price' => $request['item_price'],
+            'image'=>$name,
         ]);
 //        $tag=$request['item_tag'];
 //        $name=$request['item_name'];
+        $file->move(public_path().'/images/', $name);
         $quantity=new Quantity();
         $quantity->item_quantity=$request['quantity'];
         $item->quantity()->save($quantity);
