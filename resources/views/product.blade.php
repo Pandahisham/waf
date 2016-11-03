@@ -102,14 +102,14 @@
                 {
                     $batch_quantity=$batch_quantity+$batch->quantity;
                 }
-                $img = \Intervention\Image\Facades\Image::make('images/panda.jpg');
-                $img->resize(100, 100);
-                $img->save();
+               // $img = \Intervention\Image\Facades\Image::make('images/panda.jpg');
+                //$img->resize(100, 125);
+                //$img->save();
             ?>
           <td>{{$count}}</td>
           <td>{{$item->tag}}</td>
           <td><a href="{!! route('batch', ['item'=>$item]) !!}">{{$item->name}}</a></td>
-          <td><img src="images/{{$item->image}}" height="400" width="2">></td>
+          <td><img src="images/{{$item->image}}" style="width:150%"></td>
           <td>{{$quantity->item_quantity}}</td>
           <td>{{$item->price}}</td>
               @if(($quantity->item_quantity)!=$batch_quantity)
