@@ -7,7 +7,7 @@
 
     <div class="customer_form">
 
-        <h2 class="customer_form">Customer Form</h2>
+        <h2>Customer Form</h2>
 
         <div class="row">
             <div class="col-md-8">
@@ -75,14 +75,11 @@
                 </form>
             </div>
 
-
-
-
-
         </div>
     </div>
 
-<div class="customer_list">
+
+<div class="customer_table">
 
 
 	<div class="row">
@@ -91,18 +88,18 @@
 
         <h2>Customer Table</h2>
 
-        <table class="table table-bordered table-fluid">
+        <table class="table table-bordered table-nonfluid">
 
             <thead>
-                <td>Name</td>
-                <td>Address</td>
-                <td >Phone Number</td>
-                <td >Email Address</td>
-                <td >Category</td>
-                <td >Term</td>
-                <td >Update</td>
-                <td >Sale</td>
-                <td>Delete</td>
+                <td width="10" >Name</td>
+                <td width="10">Address</td>
+                <td width="10" >Phone Number</td>
+                <td width="20" >Email Address</td>
+                <td width="10" >Category</td>
+                <td width="10" >Term</td>
+                <td width="10" >Update</td>
+                <td width="10" >Sale</td>
+                <td width="10">Delete</td>
               
             </thead>
            @foreach($customers as $customer)
@@ -129,6 +126,18 @@
   </div>
 
 </div>	
+
+<footer>
+  <address>
+    Company name: Creative Associate Limited <br>
+    468 Katherine Road, <br>
+    London, E7 8DP.
+  
+  </address>
+
+  <p id="copyright">&copy; 2016 Creative Associate Limited<p>
+  
+</footer>
 
 
 @endsection

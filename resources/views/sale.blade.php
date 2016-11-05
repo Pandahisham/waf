@@ -53,20 +53,20 @@
 
   
 
-<div class="col-md-6">
+<div class="col-md-8">
 
-    <table class="table table-bordered table-nonfluid">
+    <table class="table table-striped table-nonfluid">
 
 
             <thead>
                 <td width="15%">Customer Name</td>
-                <td width="15%">Customer Type</td>
-                <td width="15%">Item Name</td>
-                <td width="15%">Quantity</td>
-                <td width="15%">Price</td>
-                <td width="15%">Discount</td>
-                <td width="15%">Price After Discount</td>
-                <td width="15%">Delete</td>
+                <td width="12.5%">Customer Type</td>
+                <td width="12.5%">Item Name</td>
+                <td width="12.5%">Quantity</td>
+                <td width="12.5%">Price</td>
+                <td width="10%">Discount</td>
+                <td width="12.5%">Price After Discount</td>
+                <td width="10%">Delete</td>
               
             </thead>
 
@@ -100,46 +100,98 @@
                 $total_discount=$total_discount+($transaction->item_discount);
                 ?>
             @endforeach
+            <?php 
+                $vat=$total_price*0.15;
+                $net_price=$total_price-$total_discount+$vat; 
+                ?>
+                @if(!$total_price==0)
+                <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>------</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tr>
+
+            <tr>
+            <td>Total Price</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{$total_price}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>
+
+             <tr>
+            <td>Total Discount</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{$total_discount}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            
+           
+            <tr>
+            <td>Vat</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{$vat}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            
+            </tr>
+
+            <tr>
+            <td>Net Price</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{$net_price}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            
+            </tr>
+            <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="{!! route('addSale', ['total_price'=>$total_price,'total_discount'=>$total_discount,'customer_id'=>$saleinfo['customer']->id,'vat'=>$vat]) !!}">Confirm Sale</a></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            
+            </tr>
+            @endif
         @endif
 
     </table>
-
-    <?php 
-    $vat=$total_price*0.15;
-    $net_price=$total_price-$total_discount+$vat; ?>
-
-    <div class="form-group" id="total_price">
-        <label for="total_price" class="col-sm-2 control-label">Total Price</label>
-        <div class="col-sm-4">
-            <input type="number" class="form-control" id="total_price" value={{$total_price}} readonly>
-        </div>
-    </div>
-
-    <div class="form-group" id="wastage_price">
-        <label for="discount_price" class="col-sm-2 control-label">Total Discount </label>
-        <div class="col-sm-4">
-            <input type="number" class="form-control" id="wastage_price" value={{$total_discount}} readonly>
-        </div>
-    </div>
-    <div class="form-group" id="sum_price">
-        <label for="sum_price" class="col-sm-2 control-label">Net Price</label>
-        <div class="col-sm-4">
-            <input type="number" class="form-control" id="sum_price" value={{$net_price}} readonly>
-        </div>
-    </div>
-    <div class="form-group" id="vat_price">
-        <label for="vat_price" class="col-sm-2 control-label">Vat</label>
-        <div class="col-sm-4">
-            <input type="number" class="form-control" id="vat" value={{$vat}} readonly>
-        </div>
-    </div>
-    <div class="form-group" id="sum_price">
-        <a href="{!! route('addSale', ['total_price'=>$total_price,'total_discount'=>$total_discount,'customer_id'=>$saleinfo['customer']->id,'vat'=>$vat]) !!}">Confirm Sale</a>
-    </div>
-</div>
+</div> 
 
 
 </div>	
 </div>
+
+<footer>
+  <address>
+    Company name: Creative Associate Limited <br>
+    468 Katherine Road, <br>
+    London, E7 8DP.
+  
+  </address>
+
+  <p id="copyright">&copy; 2016 Creative Associate Limited<p>
+  
+</footer>
 
 @endsection

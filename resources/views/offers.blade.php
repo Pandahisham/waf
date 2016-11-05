@@ -1,16 +1,16 @@
 @extends('layouts.home')
 
-<link rel="stylesheet" type="text/css" href="{{ asset('css/shipment.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/offer.css')}}">
 
 
 @section('order')
 <?php $items=\App\Item::all();?>
 
-<div class="order_form">
+<div class="offer_form">
 	<h2>Product Offers</h2>
 
-	<div class="row">
-        <div class="col-md-6">
+<div class="row">
+        <div class="col-md-8">
 
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/addOffer') }}">
                 {{ csrf_field() }}
@@ -47,13 +47,6 @@
             </div>
           </div>
 
-  			<!--	<div class="form-group">
-    				<label for="wastage_price" class="col-sm-2 control-label">Wastage Price</label>
-    				<div class="col-sm-4">
-   	 				<input type="" class="form-control" id="wastage_price">
-   	 				</div>
-  				</div> -->
-
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
@@ -62,13 +55,16 @@
 
                     </div>
                 </div>
-	</form>
-</div>
-<div id="product_table">
+	         </form>
+        </div>
+    </div>
+  </div>      
 
-  <h2>Product Inventory</h2>
+<div id="product_invt">
+  <h2 >Product Inventory</h2>
 
   <div class="row">
+
 
     <div class="col-md-10">
 
@@ -103,12 +99,20 @@
       </table>
 
     </div>
-
-  </div>  
-
+  </div>
 </div>
+
+<footer>
+  <address>
+    Company name: Creative Associate Limited <br>
+    468 Katherine Road, <br>
+    London, E7 8DP.
   
+  </address>
 
-
+  <p id="copyright">&copy; 2016 Creative Associate Limited<p>
+  
+</footer>
+  
 
 @endsection

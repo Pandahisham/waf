@@ -1,8 +1,10 @@
 .sales{
-	margin-top: 50px;
-	margin-bottom: 20px;
-	margin-right: 30px;
-	margin-left: 60px;
+	margin-top:80px;
+	margin-bottom: 60px;
+	padding-top: 40px;
+	padding-left:30px;
+	padding-right: 30px;
+	padding-bottom: 80px;
 	background: white;
 }
 
@@ -14,6 +16,13 @@
 	padding-bottom: 30px;
 	text-align: center;
 	
+}
+
+.table-nonfluid{
+  
+  width: auto ;
+  text-align: center;
+
 }
 
 table thead{
@@ -29,5 +38,29 @@ table tbody td{
 
 tbody tr td a{
 	margin-left: 45px;
+
+}
+
+
+footer{
+
+	height: 250px;
+	background-color: #81d8d0;
+	margin-bottom: 30px;
+
+}
+
+address{
+	padding-left: 60px;
+	padding-top: 60px;
+	font-family:  Lucida Fax serif;
+	font-variant: small-caps;
+	font-size: 20px;
+
+}
+
+ #copyright {
+
+ 	text-align: center;
 
 }

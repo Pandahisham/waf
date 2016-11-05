@@ -18,7 +18,7 @@
               {{ csrf_field() }}
 
   			  <div class="form-group">
-				    <label for="item_tag" class="col-sm-4 control-label">Item Tag</label>
+				    <label for="item_tag" class="col-sm-4 control-label">Item Code</label>
 				    <div class="col-sm-4">
 				    <input type="text" class="form-control" id="item_tag" name="item_tag">
 				    </div>
@@ -44,13 +44,17 @@
     				<div class="col-sm-4">
    	 				<input type="float" class="form-control" id="item_price" name="item_price">
    	 				</div>
-  				</div>
-          <div class="form-group">
+           </div> 
+
+            <div class="form-group">
             <label for="image" class="col-sm-4 control-label">Image</label>
+
             <div class="col-sm-4">
-            <input type="file" class="form-control" id="image" name="image">
+            <input type="file" id="image" name="image">
             </div>
-          </div>
+
+  				  </div>
+
               <div class="form-group">
                   <div class="col-md-8 col-md-offset-4">
                       <button type="submit" class="btn btn-primary">
@@ -60,12 +64,8 @@
                   </div>
               </div>
 
-
-
-
-
       </form>
-      </div>  
+    </div>  
 	    
 </div>
 </div>
@@ -102,14 +102,11 @@
                 {
                     $batch_quantity=$batch_quantity+$batch->quantity;
                 }
-               // $img = \Intervention\Image\Facades\Image::make('images/panda.jpg');
-                //$img->resize(100, 125);
-                //$img->save();
             ?>
           <td>{{$count}}</td>
           <td>{{$item->tag}}</td>
           <td><a href="{!! route('batch', ['item'=>$item]) !!}">{{$item->name}}</a></td>
-          <td><img src="images/{{$item->image}}" style="width:150%"></td>
+          <td><img src="images/{{$item->image}}" style="width:100%"></td>
           <td>{{$quantity->item_quantity}}</td>
           <td>{{$item->price}}</td>
               @if(($quantity->item_quantity)!=$batch_quantity)
@@ -128,6 +125,18 @@
   </div>	
 
 </div>
+
+<footer>
+  <address>
+    Company name: Creative Associate Limited <br>
+    468 Katherine Road, <br>
+    London, E7 8DP.
+  
+  </address>
+
+  <p id="copyright">&copy; 2016 Creative Associate Limited<p>
+  
+</footer>
 
 
 @endsection

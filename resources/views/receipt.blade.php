@@ -1,7 +1,15 @@
-@extends('layouts.home')
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+ <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+  <script src="js/jquery.js"></script>
+   <script src="js/bootstrap.js"></script>
+
 <link rel="stylesheet" type="text/css" href="{{ asset('css/receipt.css')}}">
 
-@section('order')
+
 <?php 
   $customer=\App\Customer::where('id',$sale->customer_id)->first();
 ?>
@@ -31,7 +39,7 @@
 
 <div id="receipt_list">
     
-  <table class="table table-striped">
+  <table class="table table-striped table-nonfluid" width="60%">
   <thead>
     <td>Serial</td>
     <td>Item Name</td>
@@ -45,7 +53,7 @@
     $i=0;
   ?>
 
-  <tbody>
+
     @foreach($transactions as $transaction)
                 <?php
 
@@ -63,20 +71,47 @@
      
     </tr>
     @endforeach
-  </tbody>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>-----------</td>
+    </tr>
+
+    <tr>
+      <td>Total Price</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{$sale->total}}</td>
+    </tr> 
+    <tr>
+      <td>Discount</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{$sale->discount}}</td>
+    </tr>
+    <tr>
+      <td>Vat</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{$sale->vat}}</td>
+    </tr> 
+    <tr>
+      <td>Net Price</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{$sale->total-$sale->discount+$sale->vat}}</td>
+    </tr>
+  
   </table>
 
 
 </div>
 
-<div class="w3-container">
-      <p>
-        <b>Total Price:{{$sale->total}} </b> <br> <br>
-        <b>Discount:{{$sale->discount}} </b> <br> <br>
-        <b>Vat: {{$sale->vat}}</b> <br> <br>
-        <b>Net Price: {{$sale->total-$sale->discount+$sale->vat}}</b>
-      </p>
-    </div>
 
-
-@endsection

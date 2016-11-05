@@ -2,7 +2,6 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('css/batch_tag.css')}}">
 
-<h1> {{$item->name}} </h1>
 @section('order')
 
   <div class="product_form">
@@ -119,6 +118,19 @@
   </div>	
 
 </div>
+
+<footer>
+  <address>
+    Company name: Creative Associate Limited <br>
+    468 Katherine Road, <br>
+    London, E7 8DP.
+  
+  </address>
+
+  <p id="copyright">&copy; 2016 Creative Associate Limited<p>
+  
+</footer>
+
 
 
 @endsection

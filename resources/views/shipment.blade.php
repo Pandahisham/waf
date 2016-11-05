@@ -6,25 +6,27 @@
 @section('order')
 <?php $items=\App\Item::all();?>
 
+
 <div class="order_form">
-	<h2>Goods Receipt Form</h2>
+
+  <h2>Goods Receipt Form</h2>
 
 	<div class="row">
-        <div class="col-md-6">
+    <div class="col-md-6">
 
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/addOrder') }}">
+      <form class="form-horizontal" role="form" method="POST" action="{{ url('/addOrder') }}">
                 {{ csrf_field() }}
 
   				<div class="dropdown">
   				<label for="cartons" class="col-sm-4 control-label">Item Code</label>
-                    <select name="Item">
-                        @foreach($items as $item)
-                            <option value={{$item->tag}} >{{$item->tag}}</option>
-                        @endforeach
-                    </select>
-				</div>
+           <select name="Item">
+              @foreach($items as $item)
+              <option value={{$item->tag}} >{{$item->tag}}</option>
+               @endforeach
+            </select>
+				  </div>
 
-  				<div class="form-group">
+  			<div class="form-group">
 				<label for="cartons" class="col-sm-4 control-label">Cartons</label>
 
 				<div class="col-sm-4">
@@ -54,15 +56,9 @@
             </div>
           </div>
 
-  			<!--	<div class="form-group">
-    				<label for="wastage_price" class="col-sm-2 control-label">Wastage Price</label>
-    				<div class="col-sm-4">
-   	 				<input type="" class="form-control" id="wastage_price">
-   	 				</div>
-  				</div> -->
-
+  	
                 <div class="form-group">
-                    <div class="col-md-8 col-md-offset-4">
+                    <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
                             Add
                         </button>
@@ -76,8 +72,6 @@
 
 <div class="col-md-6">
 
-   
-  
 
     <table class="table table-bordered table-nonfluid">
 
@@ -120,34 +114,56 @@
       
         </table>
 
+
             <?php $sum_price=$final_price-$wastage_price; ?>
+            @if(!$final_price==0)
 
           <div class="form-group" id="total_price">
-            <label for="total_price" class="col-sm-2 control-label">Total Price</label>
-            <div class="col-sm-4">
-            <input type="number" class="form-control" id="total_price" value={{$final_price}} readonly>
-            </div>
-          </div>
+
+            <label for="total_price" class="col-sm-4 control-label">Total Price</label>
+
+            <div class="col-sm-2 " >
+            <input class="form-control" id="total_price" value={{$final_price}} readonly>
+            </div> <br>
+
+          </div> <br>
 
             <div class="form-group" id="wastage_price">
-                <label for="wastage_price" class="col-sm-2 control-label">Total Wastage Price</label>
-                <div class="col-sm-4">
-                <input type="number" class="form-control" id="wastage_price" value={{$wastage_price}} readonly>
-                </div>
-            </div>
+                <label for="wastage_price" class="col-sm-4 control-label">Total Wastage Price</label>
+                <div class="col-sm-2">
+                <input  class="form-control" id="wastage_price" value={{$wastage_price}} readonly>
+                </div> <br>
+            </div> <br>
+
         <div class="form-group" id="sum_price">
-            <label for="sum_price" class="col-sm-2 control-label">Sum Price</label>
-            <div class="col-sm-4">
-            <input type="number" class="form-control" id="sum_price" value={{$sum_price}} readonly>
-            </div>
-        </div>
-        <div class="form-group" id="sum_price">
+            <label for="sum_price" class="col-sm-4 control-label">Sum Price</label>
+            <div class="col-sm-2">
+            <input class="form-control" id="sum_price" value={{$sum_price}} readonly>
+            </div> <br>
+        </div> <br>
+
+        <div class="form-group" id="confirm_shipment">
             <a href="{!! route('addShipment', ['total_price'=>$final_price,'wastage_price'=>$wastage_price]) !!}">Confirm Shipment</a>
         </div>
-</div>
+        @endif
 
+    </div>	
 
-</div>	
-</div>
+  </div>
+</div>  
+
+<footer>
+
+ 
+  <address>
+    Company name: Creative Associate Limited <br>
+    468 Katherine Road, <br>
+    London, E7 8DP.
+  
+  </address>
+
+  <p id="copyright">&copy; 2016 Creative Associate Limited<p>
+  
+</footer>
 
 @endsection
