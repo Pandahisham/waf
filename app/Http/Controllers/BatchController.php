@@ -33,6 +33,7 @@ class BatchController extends Controller
         $batch->expiry=$request['expiry'];
        $batch->tag=$request['tag'];
         $batch->save();
+        echo "<script>alert('batch saved');</script>";
         return back();
     }
     public function updateBatchInfo(Request $request){
@@ -45,6 +46,7 @@ class BatchController extends Controller
         $batch->tag=$request['tag'];
         $batch->shrinkage=$request['shrinkage'];
         $batch->save();
+        echo "<script>alert('batch updated');</script>";
         return back();
     }
     public function deleteBatch(Batch $batch)
@@ -54,6 +56,7 @@ class BatchController extends Controller
         }
 
         $batch->delete();
+        echo "<script>alert('batch deleted');</script>";
         return back();
     }
     public function updateBatchPage(Batch $batch)

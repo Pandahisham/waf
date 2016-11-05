@@ -49,6 +49,7 @@ class ItemController extends Controller
         $offer->validity=$request['validity'];
         $offer->price=$price;
         $offer->save();
+        echo "<script>alert('Offer Added');</script>";
         return redirect('/offers');
     }
     public function insertItem(Request $request)
@@ -70,6 +71,7 @@ class ItemController extends Controller
         $quantity=new Quantity();
         $quantity->item_quantity=$request['quantity'];
         $item->quantity()->save($quantity);
+        echo "<script>alert('Item Added');</script>";
         //$item->quantity()->save($quantity);
         return back();
     }
@@ -84,6 +86,7 @@ class ItemController extends Controller
         $quantity=new Quantity();
         $quantity->item_quantity=$item_quantity;
         $item->quantity()->save($quantity);
+        echo "<script>alert('Quantity Updated');</script>";
         return back();
     }
     public function deleteItem(Item $item)
@@ -93,6 +96,7 @@ class ItemController extends Controller
         }
 
         $item->delete();
+        echo "<script>alert('Item Deleted');</script>";
         return back();
     }
     public function deleteOffer(Offer $offer)
@@ -102,6 +106,7 @@ class ItemController extends Controller
         }
 
         $offer->delete();
+        echo "<script>alert('Offer Deleted');</script>";
         return back();
     }
 }

@@ -73,6 +73,7 @@ class ShipmentController extends Controller
                 $quantity->save();
 
             }
+            echo "<script>alert('Shipment Confirmed');</script>";
             return redirect('/shipment');
 
         }

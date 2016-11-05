@@ -64,7 +64,7 @@ class SaleController extends Controller
         $item_id=$item->id;
         $item_quantity=Quantity::where('item_id',$item_id)->first();
         if($item_quantity->item_quantity<$quantity){
-            echo "Not enough items in the inventory";
+            echo "<script>alert('Not enough Item in the inventory');</script>";
             return back();
         }
         else{

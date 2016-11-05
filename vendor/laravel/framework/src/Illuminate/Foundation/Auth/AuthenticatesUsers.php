@@ -74,8 +74,7 @@ trait AuthenticatesUsers
      */
     protected function credentials(Request $request)
     {
-        
-        return array_merge($request->only($this->username(), 'password'), ['user_type' => 1]);
+         return array_merge($request->only($this->username(), 'password'), ['user_type' => 1]);
     }
 
     /**

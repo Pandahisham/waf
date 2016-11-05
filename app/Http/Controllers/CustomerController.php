@@ -35,6 +35,7 @@ class CustomerController extends Controller
             'category' => $request['category'],
             'term' => $request['term'],
         ]);
+        echo "<script>alert('Customer Added');</script>";
         return back();
     }
     public function deleteCustomer(Customer $customer)
@@ -44,6 +45,7 @@ class CustomerController extends Controller
         }
 
         $customer->delete();
+        echo "<script>alert('Customer Deleted');</script>";
         return back();
     }
     public function updateCustomer(Customer $customer)
@@ -67,6 +69,7 @@ class CustomerController extends Controller
             $customer->category=$request['category'];
             $customer->term=$request['term'];
             $customer->save();
+            echo "<script>alert('Customer Information Updated');</script>";
         return back();
     }
 }
