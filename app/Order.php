@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'item_id','status','cartons','pieces_per_carton','total_price','wasted_cartons','wastage_price',
+        'item_id','status','cartons','pieces_per_carton','total_price','wasted_cartons','wastage_price','supplier_id',
     ];
     public function shipment(){
         return $this->belongsTo('App\Shipment');

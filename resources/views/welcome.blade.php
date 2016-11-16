@@ -28,9 +28,9 @@
                     <i class="fa fa-user fa-2x" style="color:#4adbc4;"aria-hidden="true"></i> <!--icon-->
                     Login</a>
                      
-                    <a href="{{ url('/register') }}">
-                    <i class="fa fa-user-plus fa-2x" style="color:#4adbc4;"aria-hidden="true"></i> <!--icon-->
-                    Register</a>
+                   <!-- <a href="{{ url('/register') }}">
+                    <i class="fa fa-user-plus fa-2x" style="color:#4adbc4;"aria-hidden="true"></i> icon
+                    Register</a> > -->
                 </div>
             @endif
 

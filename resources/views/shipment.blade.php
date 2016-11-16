@@ -55,7 +55,9 @@
             <input type="float" class="form-control" id="price_per_cartons" name="price_per_carton" >
             </div>
           </div>
-
+              <div class="col-sm-4">
+                        <input type="hidden" class="form-control" id="supplier_id" name="supplier_id" value="{{$shipmentinfo['supplier']->id}}">
+                    </div>
   	
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
@@ -87,6 +89,7 @@
         <?php
             $final_price=0;
             $wastage_price=0;
+            $orders=$shipmentinfo['orders'];
         ?>
            @if(!empty($orders))
         @foreach($orders as $order)
@@ -143,7 +146,7 @@
         </div> <br>
 
         <div class="form-group" id="confirm_shipment">
-            <a href="{!! route('addShipment', ['total_price'=>$final_price,'wastage_price'=>$wastage_price]) !!}">Confirm Shipment</a>
+            <a href="{!! route('addShipment', ['total_price'=>$final_price,'supplier_id'=>$shipmentinfo['supplier']->id,'wastage_price'=>$wastage_price]) !!}">Confirm Shipment</a>
         </div>
         @endif
 

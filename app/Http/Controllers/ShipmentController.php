@@ -7,19 +7,23 @@ use App\Order;
 use App\Quantity;
 use App\Shipment;
 use Illuminate\Http\Request;
+use App\Supplier;
 
 use App\Http\Requests;
 
 class ShipmentController extends Controller
 {
-    public function index()
+    public function index(Supplier $supplier)
     {
         if(auth()->user())
         {
-            $orders=Order::where('status',0)->get();
+            $orders=Order::where('status',0)->where('supplier_id',$supplier->id)->get();
+            $shipmentinfo = array(
+                'orders'  => $orders,
+                'supplier'   => $supplier,
+            );
 
-
-            return view('shipment')->with('orders',$orders);
+            return view('shipment')->with('shipmentinfo',$shipmentinfo);
 
         }
         else
@@ -27,6 +31,7 @@ class ShipmentController extends Controller
     }
     public function addOrder(Request $request){
         $item_tag=$request['Item'];
+        $supplier_id=$request['supplier_id'];
         $cartons=intval($request['cartons']);
         $piece_per_carton=intval($request['piece_per_carton']);
         $price_per_carton=floatval($request['price_per_carton']);
@@ -41,8 +46,9 @@ class ShipmentController extends Controller
         $order->wasted_cartons=$wasted_cartons;
         $order->total_price=$price_per_carton*$cartons;
         $order->wasted_price=$price_per_carton*$wasted_cartons;
+        $order->supplier_id=$supplier_id;
         $order->save();
-        return redirect('/shipment');
+        return back();
     }
     public function deleteOrder(Order $order)
     {
@@ -53,11 +59,12 @@ class ShipmentController extends Controller
         $order->delete();
         return back();
     }
-    public function addShipment($total_price,$wastage_price){
+    public function addShipment($total_price,$supplier_id,$wastage_price){
         if(auth()->user())
         {
-            $orders=Order::where('status',0)->get();
+            $orders=Order::where('status',0)->where('supplier_id',$supplier_id)->get();
             $shipment=Shipment::create([
+                'supplier_id'=>$supplier_id,
                 'total_price' => $total_price,
                 'wastage_price' => $wastage_price,
             ]);
@@ -74,7 +81,7 @@ class ShipmentController extends Controller
 
             }
             echo "<script>alert('Shipment Confirmed');</script>";
-            return redirect('/shipment');
+            return back();
 
         }
 

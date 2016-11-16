@@ -7,15 +7,14 @@
 
     <div class="customer_form">
 
-        <h2>Customer Form</h2>
+        <h2>Supplier Form</h2>
 
         <div class="row">
             <div class="col-md-8">
 
 
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/addCustomer') }}">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/addSupplier') }}">
                     {{ csrf_field() }}
-
 
                     <div class="form-group">
                         <label for="identification" class="col-sm-4 control-label">Identification</label>
@@ -24,6 +23,7 @@
                             <input type="" class="form-control" id="identification" name="identification">
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="name" class="col-sm-4 control-label">Name</label>
 
@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="form-group">
-                            <label for="category" class="col-sm-4 control-label">Customer Type</label>
+                            <label for="category" class="col-sm-4 control-label">Supplier Type</label>
                             <select name="category">
                                     <option value="wholesale">WholeSale</option>
                                     <option value="retail">Retail</option>
@@ -93,11 +93,12 @@
 
     <div class="col-md-12">
 
-        <h2>Customer Table</h2>
+        <h2>Supplier Table</h2>
 
         <table class="table table-bordered table-nonfluid">
 
             <thead>
+                <td width="10" >Identification</td>
                 <td width="10" >Name</td>
                 <td width="10">Address</td>
                 <td width="10" >Phone Number</td>
@@ -105,22 +106,22 @@
                 <td width="10" >Category</td>
                 <td width="10" >Term</td>
                 <td width="10" >Update</td>
-                <td width="10" >Sale</td>
+                <td width="10" >Shipment</td>
                 <td width="10">Delete</td>
               
             </thead>
-           @foreach($customers as $customer)
+           @foreach($suppliers as $supplier)
             <tr>
-
-              <td>{{$customer->name}}</td>
-              <td>{{$customer->address}}</td>
-              <td>{{$customer->phone}}</td>
-              <td>{{$customer->email}}</td>
-              <td>{{$customer->category}}</td>
-              <td>{{$customer->term}}</td>
-                <td><a href="{!! route('updateCustomer', ['customer'=>$customer]) !!}">Update Information</a></td>
-                <td><a href="{!! route('saleToCustomer', ['customer'=>$customer]) !!}">Sales</a></td>
-                <td><a href="{!! route('deleteCustomer', ['customer'=>$customer]) !!}">x</a></td>
+              <td>{{$supplier->identification}}</td>
+              <td>{{$supplier->name}}</td>
+              <td>{{$supplier->address}}</td>
+              <td>{{$supplier->phone}}</td>
+              <td>{{$supplier->email}}</td>
+              <td>{{$supplier->category}}</td>
+              <td>{{$supplier->term}}</td>
+                <td><a href="{!! route('updateSupplier', ['supplier'=>$supplier]) !!}">Update Information</a></td>
+                <td><a href="{!! route('orderFromSupplier', ['supplier'=>$supplier]) !!}">Shipment</a></td>
+                <td><a href="{!! route('deleteSupplier', ['supplier'=>$supplier]) !!}">x</a></td>
             </tr>
            @endforeach
       
